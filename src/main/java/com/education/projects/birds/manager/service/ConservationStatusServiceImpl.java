@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @Service
 @Slf4j
-public class ConservationStatusServiceImpl {
+public class ConservationStatusServiceImpl implements ConservationStatusService{
     @Autowired
     private ConservationStatusRepository conservationStatusRepository;
     @Autowired

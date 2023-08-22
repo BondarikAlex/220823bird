@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: CREATE USERS
-      author: ART
+      id: CREATE Birds
+      author: BAS
       changes:
         - createTable:
-            tableName: user_levels
+            tableName: conservation_status
             columns:
               - column:
                   name: id
@@ -14,12 +14,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: leveldescr
+                  name: status_name
                   type: varchar
                   constraints:
                     nullable: false
         - createTable:
-            tableName: user_roles
+            tableName: species_status
             columns:
               - column:
                   name: id
@@ -29,12 +29,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: roledescr
+                  name: status_name
                   type: varchar
                   constraints:
                     nullable: false
         - createTable:
-            tableName: users
+            tableName: birds
             columns:
               - column:
                   name: id
@@ -44,44 +44,44 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: firstname
+                  name: russian_name
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: lastname
+                  name: english_title
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: password
+                  name: latin_name
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: email
+                  name: description
+                  type: varchar(510)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: avatar_id
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: phone
-                  type: varchar(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: role_id
+                  name: id_conservation_status
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: role_id
-                    references: user_roles(id)
+                    foreignKeyName: id_conservation_status
+                    references: conservation_status(id)
               - column:
-                  name: level_id
+                  name: id_species_status
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: level_id
-                    references: user_levels(id)
+                    foreignKeyName: id_species_status
+                    references: species_status(id)
               - column:
                   name: created_at
                   type: timestamp

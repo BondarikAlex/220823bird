@@ -1,11 +1,8 @@
 package com.education.projects.birds.manager.controller;
 
 import com.education.projects.birds.manager.dto.request.BirdDtoReq;
-import com.education.projects.birds.manager.dto.request.UserDtoReq;
 import com.education.projects.birds.manager.dto.response.BirdDtoResp;
-import com.education.projects.birds.manager.dto.response.UserDtoResp;
 import com.education.projects.birds.manager.entity.Bird;
-import com.education.projects.birds.manager.entity.SpeciesStatus;
 import com.education.projects.birds.manager.entity.BirdPage;
 import com.education.projects.birds.manager.entity.BirdSearchCriteria;
 import com.education.projects.birds.manager.service.DBBirdServiceImpl;

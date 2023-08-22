@@ -1,11 +1,7 @@
 package com.education.projects.birds.manager.service;
-
 import com.education.projects.birds.manager.dto.request.BirdDtoReq;
-import com.education.projects.birds.manager.dto.request.UserDtoReq;
 import com.education.projects.birds.manager.dto.response.BirdDtoResp;
-import com.education.projects.birds.manager.dto.response.UserDtoResp;
 import com.education.projects.birds.manager.entity.Bird;
-import com.education.projects.birds.manager.entity.SpeciesStatus;
 
 import java.util.Collection;
 

@@ -8,12 +8,13 @@ import lombok.Data;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 public class BirdDtoResp {
 
     @Schema(name = "id", description = "Bird id", example = "1")
-    private Integer Id;
+    private UUID Id;
 
     @Schema (name = "avatar_id", description = "Bird avatar_id", example = "John")
     private String avatar_id;
@@ -31,10 +32,10 @@ public class BirdDtoResp {
     private String english_title;
 
     @Schema (name = "id_species_status", description = "Bird speciesStatus", example = "2")
-    private Integer id_species_status;
+    private UUID id_species_status;
 
     @Schema (name = "id_conservation_status", description = "Bird id_conservation_status", example = "3")
-    private Integer id_conservation_status;
+    private UUID id_conservation_status;
 
     @Schema (name = "createdAt", description = "Bird creation date", example = "2017-05-14T10:34")
     private LocalDateTime createdAt;

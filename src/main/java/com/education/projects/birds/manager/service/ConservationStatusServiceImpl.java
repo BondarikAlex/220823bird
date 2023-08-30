@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -40,7 +41,7 @@ public class ConservationStatusServiceImpl implements ConservationStatusService{
      * @return The ConservationStatusMapper object from database
      * @throws Exception
      */
-    public ConservationStatusDtoResp getConservationStatusDtoById(Integer id) throws Exception {
+    public ConservationStatusDtoResp getConservationStatusDtoById(UUID id) throws Exception {
         try {
             if (conservationStatusRepository.existsById(id))
                 return conservationStatusMapper.conservationStatusToConservationStatusDto(conservationStatusRepository.getReferenceById(id));
@@ -55,7 +56,7 @@ public class ConservationStatusServiceImpl implements ConservationStatusService{
         }
     }
 
-    public ConservationStatus getConservationStatusById(Integer id) throws Exception {
+    public ConservationStatus getConservationStatusById(UUID id) throws Exception {
         try {
             if (conservationStatusRepository.existsById(id))
                 return conservationStatusRepository.getReferenceById(id);

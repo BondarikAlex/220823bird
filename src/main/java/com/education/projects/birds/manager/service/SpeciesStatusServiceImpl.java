@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.UUID;
+
 @Service
 @Slf4j
-public class SpeciesStatusServiceImpl implements SpeciesStatusService {
+public class SpeciesStatusServiceImpl  {
     @Autowired
     private SpeciesStatusRepository speciesStatusRepository;
     @Autowired
@@ -38,7 +40,7 @@ public class SpeciesStatusServiceImpl implements SpeciesStatusService {
      * @return The SpeciesStatus object from database
      * @throws Exception
      */
-    public SpeciesStatusDtoResp getSpeciesStatusDtoById(Integer id) throws Exception {
+    public SpeciesStatusDtoResp getSpeciesStatusDtoById(UUID id) throws Exception {
         try {
             if (speciesStatusRepository.existsById(id))
                 return speciesStatusMapper.speciesStatusToSpeciesStatusDto(speciesStatusRepository.getReferenceById(id));
@@ -53,7 +55,7 @@ public class SpeciesStatusServiceImpl implements SpeciesStatusService {
         }
     }
 
-    public SpeciesStatus getSpeciesStatusById(Integer id) throws Exception {
+    public SpeciesStatus getSpeciesStatusById(UUID id) throws Exception {
         try {
             if (speciesStatusRepository.existsById(id))
                 return speciesStatusRepository.getReferenceById(id);

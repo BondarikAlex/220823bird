@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -14,7 +16,7 @@ public class ConservationStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "id", description = "ConservationStatus id", example = "1")
     @Column(name = "id", insertable = false)
-    private Integer id;
+    private UUID id;
 
     @Schema (name = "status_name", description = "Description of the status_name", example = "Изчезающие")
     @Column(name = "status_name", nullable = false)

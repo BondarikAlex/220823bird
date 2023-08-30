@@ -8,14 +8,15 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
-                  autoIncrement: true
+                  type: uuid
+                  autoIncrement: ${autoIncrement}
                   constraints:
+                    default: uuid_generate_v1mc()
                     primaryKey: true
                     nullable: false
               - column:
                   name: status_name
-                  type: varchar
+                  type: varchar(32)
                   constraints:
                     nullable: false
         - createTable:
@@ -23,14 +24,15 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
-                  autoIncrement: true
+                  type: uuid
+                  autoIncrement: ${autoIncrement}
                   constraints:
+                    default: uuid_generate_v1mc()
                     primaryKey: true
                     nullable: false
               - column:
                   name: status_name
-                  type: varchar
+                  type: varchar(32)
                   constraints:
                     nullable: false
         - createTable:
@@ -38,46 +40,46 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
-                  autoIncrement: true
+                  type: uuid
+                  autoIncrement: ${autoIncrement}
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
                   name: russian_name
-                  type: varchar(50)
+                  type: varchar(64)
                   constraints:
                     nullable: false
               - column:
                   name: english_title
-                  type: varchar(50)
+                  type: varchar(64)
                   constraints:
                     nullable: false
               - column:
                   name: latin_name
-                  type: varchar(50)
+                  type: varchar(64)
                   constraints:
                     nullable: false
               - column:
                   name: description
-                  type: varchar(510)
+                  type: varchar(512)
                   constraints:
                     nullable: false
               - column:
                   name: avatar_id
-                  type: varchar(50)
+                  type: varchar(8)
                   constraints:
                     nullable: false
               - column:
                   name: id_conservation_status
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: id_conservation_status
                     references: conservation_status(id)
               - column:
                   name: id_species_status
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: id_species_status

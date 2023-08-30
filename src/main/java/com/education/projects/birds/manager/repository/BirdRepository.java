@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface BirdRepository extends JpaRepository<Bird, Integer>, JpaSpecificationExecutor<Bird> {
-   /* @Query("select")
-    Collection <User> findAllByBrand();*/
+public interface BirdRepository extends JpaRepository<Bird, UUID>{
 }

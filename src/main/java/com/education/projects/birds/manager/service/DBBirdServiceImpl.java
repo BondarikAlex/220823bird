@@ -2,6 +2,7 @@ package com.education.projects.birds.manager.service;
 import com.education.projects.birds.manager.dto.request.BirdDtoReq;
 import com.education.projects.birds.manager.dto.response.BirdDtoResp;
 import com.education.projects.birds.manager.entity.Bird;
+import com.education.projects.birds.manager.exception.BirdNotFoundException;
 import com.education.projects.birds.manager.mapper.BirdMapper;
 import com.education.projects.birds.manager.repository.BirdRepository;
 import com.education.projects.birds.manager.repository.SearchCriteria;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * The class for service User information in database
@@ -42,20 +44,17 @@ public class DBBirdServiceImpl implements BirdService {
      * @throws Exception
      */
     public BirdDtoResp createBird(BirdDtoReq birdDtoReq) throws Exception {
-        try {
+
             Bird bird = birdMapper.birdDtoToBird(birdDtoReq);
             bird.setConservationStatus(conservationStatusServiceImpl.getConservationStatusById(birdDtoReq.getId_conservation_status()));
-            bird.setSpeciesStatus(speciesStatusServiceImpl.getSpeciesStatusById(birdDtoReq.getId_conservation_status()));
+            bird.setSpeciesStatus(speciesStatusServiceImpl.getSpeciesStatusById(birdDtoReq.getId_species_status()));
 
             BirdDtoResp birdDtoResp = birdMapper.birdToBirdDto(
                     birdRepository.save(bird));
             birdDtoResp.setId_species_status(bird.getConservationStatus().getId());
             birdDtoResp.setId_species_status(bird.getConservationStatus().getId());
             return birdDtoResp;
-        }catch (Exception e){
-            log.error("Error: {}", e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+
     }
 
     /**
@@ -66,21 +65,20 @@ public class DBBirdServiceImpl implements BirdService {
      * @return User object information from database by id
      * @throws Exception
      */
-    public BirdDtoResp updateBird(BirdDtoReq birdDtoReq, Integer id) throws Exception {
-        try {
+    public BirdDtoResp updateBird(BirdDtoReq birdDtoReq, UUID id) throws Exception {
+
             if (birdRepository.existsById(id)) {
                 Bird birdToChange = birdMapper.birdDtoToBird(birdDtoReq);
+                birdToChange.setConservationStatus(conservationStatusServiceImpl.getConservationStatusById(birdDtoReq.getId_conservation_status()));
+                birdToChange.setSpeciesStatus(speciesStatusServiceImpl.getSpeciesStatusById(birdDtoReq.getId_species_status()));
                 birdToChange.setId(id);
-                return birdMapper.birdToBirdDto(birdRepository.save(birdToChange));
-            } else {
-                Exception e = new Exception("The bird wasn't found");
-                log.error("Error: {}", e.getMessage());
-                throw e;
-            }
-        }catch (Exception ex){
-            log.error("Error: {}", ex.getMessage());
-            throw new Exception(ex.getMessage());
-        }
+                BirdDtoResp birdDtoResp = birdMapper.birdToBirdDto(birdRepository.save(birdToChange));
+                birdDtoResp.setId_species_status(birdToChange.getSpeciesStatus().getId());
+                birdDtoResp.setId_conservation_status(birdToChange.getConservationStatus().getId());
+
+                return birdDtoResp;
+            }else throw new BirdNotFoundException(id);
+
     }
 
     /**
@@ -88,13 +86,8 @@ public class DBBirdServiceImpl implements BirdService {
      *
      * @return The list of the User objects
      */
-    public Collection<BirdDtoResp> getAllBirds() throws Exception{
-        try {
+    public Collection<BirdDtoResp> getAllBirds() {
             return birdMapper.birdListToBirdDtoList(birdRepository.findAll());
-        }catch (Exception e){
-            log.error("Error: {}", e.getMessage());
-            throw new Exception(e.getMessage());
-        }
     }
 
     /**
@@ -104,19 +97,10 @@ public class DBBirdServiceImpl implements BirdService {
      * @return The User object from database
      * @throws Exception
      */
-    public BirdDtoResp getBirdById(Integer id) throws Exception {
-        try {
+    public BirdDtoResp getBirdById(UUID id) throws BirdNotFoundException {
             if (birdRepository.existsById(id))
                 return birdMapper.birdToBirdDto(birdRepository.getReferenceById(id));
-            else {
-                Exception e = new Exception("The bird wasn't found");
-                log.error("Error: {}", e.getMessage());
-                throw e;
-            }
-        }catch (Exception e){
-            log.error("Error: {}", e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+            else throw new BirdNotFoundException(id);
     }
 
     /**
@@ -124,50 +108,23 @@ public class DBBirdServiceImpl implements BirdService {
      *
      * @param id is a row in database
      */
-    public void deleteBirdById(Integer id) throws Exception {
-        try {
+    public void deleteBirdById(UUID id) throws BirdNotFoundException {
+
             if (birdRepository.existsById(id))
                 birdRepository.deleteById(id);
-            else {
-                Exception e = new Exception("The bird wasn't found");
-                log.error("Error: {}", e.getMessage());
-                throw e;
-            }
-        }catch (Exception e){
-            log.error("Error: {}", e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+            else throw new BirdNotFoundException(id);
     }
 
-    /**
-     * Sorts and filters Users objects information from database, returns list of User objects
-     *
-     * @param sortBy        Sets the sort order
-     * @param sortDirection Sets the sort direction (ACK/DESC)
-     * @param filter        The filter parameter, which need to parse
-     * @return The list of the User objects
-     * @throws Exception
-     */
-    public Collection<Bird> getSortedFilteredBirds(String sortBy, String sortDirection, String filter)
-            throws Exception {
-
-        String[] arrFilter = filter.split("\\.");
-        String key = arrFilter[1];
-        String value = arrFilter[2];
-        String operation = (arrFilter[0].equals("eq")) ? "= " : "!= ";
-
-        BirdSpecification spec = new BirdSpecification(new SearchCriteria(key, operation, value));
-        return birdRepository.findAll(spec);
+    @Override
+    public Collection<Bird> getSortedFilteredBirds(BirdPage birdPage, BirdSearchCriteria birdSearchCriteria) throws Exception {
+        return null;
     }
+
 
     public Page<BirdDtoResp> getSortedFilteredBirdsCommon(BirdPage birdPage,
-                                                          BirdSearchCriteria birdSearchCriteria)
-    throws Exception{
-        try {
+                                                          BirdSearchCriteria birdSearchCriteria){
+
             return birdCriteriaRepository.findAllWithFilters(birdPage, birdSearchCriteria);
-        }catch (Exception e){
-            log.error("Error: {}", e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+
     }
 }

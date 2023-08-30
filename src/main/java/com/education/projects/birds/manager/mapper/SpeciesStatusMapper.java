@@ -10,5 +10,5 @@ import java.util.List;
 public interface SpeciesStatusMapper {
 
     SpeciesStatusDtoResp speciesStatusToSpeciesStatusDto(SpeciesStatus speciesStatus);
-    List<SpeciesStatusDtoResp> speciesStatusListToSpeciesStatusDtoList(List<SpeciesStatus> speciesStates);
+    List<SpeciesStatusDtoResp> speciesStatusListToSpeciesStatusDtoList(List<SpeciesStatus> speciesStatuses);
 }

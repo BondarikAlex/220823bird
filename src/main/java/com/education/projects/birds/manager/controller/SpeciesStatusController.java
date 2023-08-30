@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 @Validated
@@ -49,7 +50,7 @@ public class SpeciesStatusController {
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
     @GetMapping("/species_status/{id}")
-    public ResponseEntity<SpeciesStatusDtoResp> getSpeciesStatusById(@PathVariable("id") @NotNull @Min(1) Integer id)
+    public ResponseEntity<SpeciesStatusDtoResp> getSpeciesStatusById(@PathVariable("id") @NotNull @Min(1) UUID id)
             throws Exception{
         log.info("Gets speciesStatus with id = {}", id);
         return new ResponseEntity <> (speciesStatusServiceImpl.getSpeciesStatusDtoById(id), HttpStatus.OK);

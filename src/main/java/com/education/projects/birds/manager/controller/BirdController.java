@@ -23,6 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 @Validated
@@ -57,7 +58,7 @@ public class BirdController {
     })
     @PutMapping("/birds/{id}")
     public ResponseEntity <BirdDtoResp> updateBird (
-            @Valid @RequestBody BirdDtoReq birdDtoReq, @PathVariable ("id") @NotNull @Min(1) Integer id)
+            @Valid @RequestBody BirdDtoReq birdDtoReq, @PathVariable ("id") @NotNull @Min(1) UUID id)
     throws Exception{
         log.info("Update bird with id = {}, update bird info {}", id, birdDtoReq);
         return new ResponseEntity<>(dbBirdServiceImpl.updateBird(birdDtoReq, id), HttpStatus.OK);
@@ -83,35 +84,16 @@ public class BirdController {
             @ApiResponse(responseCode = "400", description = "Bad request"),
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
-    @GetMapping("/sortedBirds")
-    public Collection <Bird> getSortFilterBirds(
-            @Schema(name = "sortBy", description = "sorting column", example = "year")
-            @RequestParam String sortBy,
-            @Schema(name = "sortDirection", description = "direction of sorting", example = "ASC/DESC")
-            @RequestParam String sortDirection,
-            @Schema(name = "filter", description = "filtering settings", example = "not_eq.year.2012")
-            @RequestParam (required = false) String filter
-    )
-    throws Exception{
-        log.info("Get sorted and filtered bird info");
-        return dbBirdServiceImpl.getSortedFilteredBirds(sortBy, sortDirection, filter);
+    @GetMapping("/sortedFilteredBirds")
+    public ResponseEntity<Page<BirdDtoResp>> getSortFilterBirdsWithPagination(BirdPage birdPage,BirdSearchCriteria birdSearchCriteria)
+         throws Exception{
+            log.info("Get sorted and filtered bird info");
+            return  new ResponseEntity<>(dbBirdServiceImpl.getSortedFilteredBirdsCommon(birdPage,birdSearchCriteria),HttpStatus.OK);
     }
 
-    @Operation(summary = "Gets sorted and filtered information about birds from database",
-            description = "Returns collection of bird objects from database")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
-            @ApiResponse(responseCode = "400", description = "Bad request"),
-            @ApiResponse(responseCode = "500", description = "Internal Server error")
-    })
-    @GetMapping("/sortedFilteredBirds")
-    public ResponseEntity<Page<BirdDtoResp>> getSortFilterBirdsCommon(BirdPage birdPage,
-                                                                      BirdSearchCriteria birdSearchCriteria)
-    throws Exception{
-        log.info("Get common sorted and filtered bird info");
-        return new ResponseEntity<>(dbBirdServiceImpl.getSortedFilteredBirdsCommon(birdPage, birdSearchCriteria),
-                HttpStatus.OK);
-    }
+
+
+
 
     @Operation(summary = "Gets bird by id",
             description = "Returns id bird information from database")
@@ -122,7 +104,7 @@ public class BirdController {
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
     @GetMapping("/birds/{id}")
-    public ResponseEntity<BirdDtoResp> getBirdById(@PathVariable ("id") @NotNull @Min(1) Integer id)
+    public ResponseEntity<BirdDtoResp> getBirdById(@PathVariable ("id") @NotNull @Min(1) UUID id)
     throws Exception{
         log.info("Gets bird with id = {}", id);
         return new ResponseEntity <> (dbBirdServiceImpl.getBirdById(id), HttpStatus.OK);
@@ -137,7 +119,7 @@ public class BirdController {
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
     @DeleteMapping("/birds/{id}")
-    public ResponseEntity<String> deleteBirdById(@PathVariable ("id") @NotNull @Min(1) Integer id)
+    public ResponseEntity<String> deleteBirdById(@PathVariable ("id") @NotNull @Min(1) UUID id)
             throws Exception {
         log.info("Deletes bird with id = {}", id);
         dbBirdServiceImpl.deleteBirdById(id);

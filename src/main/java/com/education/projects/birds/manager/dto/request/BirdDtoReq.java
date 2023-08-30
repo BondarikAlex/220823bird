@@ -10,6 +10,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class BirdDtoReq {
 
@@ -42,11 +44,11 @@ public class BirdDtoReq {
     @NotNull (message = "id_conservation_status should not be empty")
     @Positive (message = "id_conservation_status should be positive")
     @Digits(integer = 2, fraction = 0, message = "integer number of not more than 2 characters")
-    private Integer id_conservation_status;
+    private UUID id_conservation_status;
 
     @Schema (name = "id_species_status", description = "Bird id_species_status", example = "3")
     @NotNull (message = "id_species_status should not be empty")
     @Positive (message = "id_species_status should be positive")
     @Digits(integer = 2, fraction = 0, message = "integer number of not more than 2 characters")
-    private Integer id_species_status;
+    private UUID id_species_status;
 }

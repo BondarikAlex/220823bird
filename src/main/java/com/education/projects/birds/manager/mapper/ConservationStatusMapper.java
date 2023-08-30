@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ConservationStatusMapper {
     ConservationStatusDtoResp conservationStatusToConservationStatusDto(ConservationStatus conservationStatus);
-    List<ConservationStatusDtoResp> conservationStatusListToConservationStatusDtoList(List<ConservationStatus> ConservationStates);
+    List<ConservationStatusDtoResp> conservationStatusListToConservationStatusDtoList(List<ConservationStatus> conservationStatuses);
 }

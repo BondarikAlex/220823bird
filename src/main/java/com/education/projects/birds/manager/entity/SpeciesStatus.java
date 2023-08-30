@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -18,7 +19,7 @@ public class SpeciesStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "id", description = "SpeciesStatus id", example = "1")
     @Column(name = "id", insertable = false)
-    private Integer id;
+    private UUID id;
 
     @Schema (name = "status_name", description = "Description of the status_name", example = "Гнездящие")
     @Column(name = "status_name", nullable = false)

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,11 +23,7 @@ public class Bird {
             this.createdAt = Timestamp.valueOf(LocalDateTime.now());
         else
             this.modificationAt = Timestamp.valueOf(LocalDateTime.now());
-        /*try {
-            this.level = levelServiceImpl.getLevelById();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }*/
+
     }
 
 
@@ -34,7 +31,7 @@ public class Bird {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "id", description = "Bird id", example = "1")
     @Column(name = "id", insertable = false)
-    private Integer id;
+    private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @Schema(name = "id_conservation_status", description = "Birds ConservationStatus", example = "2")

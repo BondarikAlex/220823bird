@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.UUID;
+
 
 @Service
 @Slf4j
@@ -18,13 +18,9 @@ public class ConservationStatusServiceImpl implements ConservationStatusService{
     @Autowired
     private ConservationStatusRepository conservationStatusRepository;
     @Autowired
-    private ConservationStatusMapper conservationStatusMapper;
+    private  ConservationStatusMapper conservationStatusMapper ;
 
-    /**
-     * Gets all ConservationStatusMapper objects information from database
-     *
-     * @return The list of the ConservationStatusMapper objects
-     */
+
     public Collection<ConservationStatusDtoResp> getAllConservationStatus() throws Exception{
         try {
             return conservationStatusMapper.conservationStatusListToConservationStatusDtoList(conservationStatusRepository.findAll());
@@ -34,14 +30,8 @@ public class ConservationStatusServiceImpl implements ConservationStatusService{
         }
     }
 
-    /**
-     * Gets the ConservationStatusMapper object information from the database by id
-     *
-     * @param id id of the ConservationStatusMapper object in database
-     * @return The ConservationStatusMapper object from database
-     * @throws Exception
-     */
-    public ConservationStatusDtoResp getConservationStatusDtoById(UUID id) throws Exception {
+
+    public ConservationStatusDtoResp getConservationStatusDtoById(Integer id) throws Exception {
         try {
             if (conservationStatusRepository.existsById(id))
                 return conservationStatusMapper.conservationStatusToConservationStatusDto(conservationStatusRepository.getReferenceById(id));
@@ -56,7 +46,7 @@ public class ConservationStatusServiceImpl implements ConservationStatusService{
         }
     }
 
-    public ConservationStatus getConservationStatusById(UUID id) throws Exception {
+    public ConservationStatus getConservationStatusById(Integer id) throws Exception {
         try {
             if (conservationStatusRepository.existsById(id))
                 return conservationStatusRepository.getReferenceById(id);

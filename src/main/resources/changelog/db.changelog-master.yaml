@@ -8,10 +8,9 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: uuid
-                  autoIncrement: ${autoIncrement}
+                  type: int
+                  autoIncrement: true
                   constraints:
-                    default: uuid_generate_v1mc()
                     primaryKey: true
                     nullable: false
               - column:
@@ -24,10 +23,9 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: uuid
-                  autoIncrement: ${autoIncrement}
+                  type: int
+                  autoIncrement: true
                   constraints:
-                    default: uuid_generate_v1mc()
                     primaryKey: true
                     nullable: false
               - column:
@@ -67,19 +65,20 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: avatar_id
-                  type: varchar(8)
+                  type: varchar(16)
                   constraints:
                     nullable: false
+                    defaultValue: не присвоено
               - column:
                   name: id_conservation_status
-                  type: uuid
+                  type: int
                   constraints:
                     nullable: false
                     foreignKeyName: id_conservation_status
                     references: conservation_status(id)
               - column:
                   name: id_species_status
-                  type: uuid
+                  type: int
                   constraints:
                     nullable: false
                     foreignKeyName: id_species_status
@@ -87,8 +86,419 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp
+                  defaultValue: now()
                   constraints:
                     nullable: false
               - column:
                   name: modification_at
                   type: timestamp
+                  defaultValue: now()
+  - changeSet:
+      id: add-data-species-status
+      author: BAS
+      changes:
+        - insert:
+            tableName: species_status
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: status_name
+                  value: nesting
+        - insert:
+            tableName: species_status
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: status_name
+                  value: wintering
+        - insert:
+            tableName: species_status
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: status_name
+                  value: stray
+        - insert:
+            tableName: species_status
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: status_name
+                  value: spanning
+  - changeSet:
+      id: add-data-conservation_status
+      author: BAS
+      changes:
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: status_name
+                  value: extinct
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: status_name
+                  value: extinct_in_the_wild
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: status_name
+                  value: critically_endangered
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: status_name
+                  value: endangered
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: status_name
+                  value: vulnerable
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: status_name
+                  value: near_threatened
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: status_name
+                  value: conservation_dependent
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: status_name
+                  value: least_concern
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: status_name
+                  value: data_deficient
+        - insert:
+            tableName: conservation_status
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: status_name
+                  value: not_evaluated
+  - changeSet:
+      id: add-data-birds
+      author: BAS
+      changes:
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: d6c5c118-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Cygnus olor
+              - column:
+                  name: russian_name
+                  value: Лебедь-шипун
+              - column:
+                  name: english_title
+                  value: Mute Swan
+              - column:
+                  name: description
+                  value: Самый крупный из лебедей Евразии. Лебедь-шипун хорошо известен благодаря крупным размерам, характерному облику и чисто-белому оперению. Отличительной особенностью самца является черный шишковидный вырост у основания надклювья, а также манера изгибать шею в форме буквы «S» и опускать под углом к воде голову и клюв.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 5
+              - column:
+                  name: id_species_status
+                  value: 3
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: d6c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Cygnus columbianus
+              - column:
+                  name: russian_name
+                  value: Малый лебедь
+              - column:
+                  name: english_title
+                  value: Tundra Swan
+              - column:
+                  name: description
+                  value: Малый лебедь очень похож на кликуна, но меньше размером! длина тела 115—127 см и 170—195 см размах крыльев. Весит малый лебедь около 5—6 кг. Голос малого лебедя также похож на голос кликуна, только тише и ниже.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 6
+              - column:
+                  name: id_species_status
+                  value: 1
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 36c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Cygnus cygnus
+              - column:
+                  name: russian_name
+                  value: Лебедь-кликун
+              - column:
+                  name: english_title
+                  value: Whooper Swan
+              - column:
+                  name: description
+                  value: Лебедь-кликун — крупная птица, весящая от 7 до 10 кг, иногда больше. Тело вытянутое, длина шеи примерно равна длине туловища. Ноги короткие, отнесены назад. В оперении большое количество пуха."
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 9
+              - column:
+                  name: id_species_status
+                  value: 2
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 46c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Anser fabalis
+              - column:
+                  name: russian_name
+                  value: Гуменник
+              - column:
+                  name: english_title
+                  value: Bean Goose
+              - column:
+                  name: description
+                  value: Гусь гуменник — крупная птица буровато-серой окраски, напоминающий серого гуся. Клюв чёрный с оранжевой полоской посередине. Самец и самка не отличаются по окраске, однако самка несколько мельче. Масса тела колеблется от 2,5 до 4,5 кг и выше.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 10
+              - column:
+                  name: id_species_status
+                  value: 4
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 56c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Anser albifrons
+              - column:
+                  name: russian_name
+                  value: Белолобый гусь
+              - column:
+                  name: english_title
+                  value: Greater White-fronted Goose
+              - column:
+                  name: description
+                  value: Белолобый гусь близок по внешнему виду к серому гусю, но несколько мельче. Он имеет бурую окраску тела, живот беловатый с чёрными пятнами, некоторые перья в крыльях также белые. Клюв розовый. В основании клюва белое пятно, за которое вид и получил название.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 8
+              - column:
+                  name: id_species_status
+                  value: 2
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 66c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Anser erythropus
+              - column:
+                  name: russian_name
+                  value: Пискулька
+              - column:
+                  name: english_title
+                  value: Lesser White-fronted Goose
+              - column:
+                  name: description
+                  value: Пискулька по окраске похожа на белолобого гуся, однако значительно меньше ростом. Также имеет более короткий клюв. Взрослые пискульки имеют большое белое пятно на лбу, которое распространяется почти до макушки головы. Длина тела достигает от 53 до 66 см, размах крыльев — от 120 до 135 см.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 6
+              - column:
+                  name: id_species_status
+                  value: 4
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 76c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Anser anser
+              - column:
+                  name: russian_name
+                  value: Серый гусь
+              - column:
+                  name: english_title
+                  value: Greylag Goose
+              - column:
+                  name: description
+                  value: Серый гусь — птица длиной до 70—90 см и массой около 2,1—4,5 кг, размах крыльев 147—180 см. Оперение серовато-бурое с волнистым рисунком на шее и брюхе. Имеет светлое окаймление перьев на спине. Клюв розоватый или оранжевый.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 8
+              - column:
+                  name: id_species_status
+                  value: 1
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 86c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Anser indicus
+              - column:
+                  name: russian_name
+                  value: Индийский гусь
+              - column:
+                  name: english_title
+                  value: Bar-headed Goose
+              - column:
+                  name: description
+                  value: Индийский или горный гусь имеет сероватую окраску тела, голова и бока шеи белые. На темени и затылке две чёрные полосы. Клюв и высокие ноги жёлтые. Длина тела 70-75 см, длина крыла 40-50 см.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 4
+              - column:
+                  name: id_species_status
+                  value: 3
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 96c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Branta canadensis
+              - column:
+                  name: russian_name
+                  value: Канадская казарка
+              - column:
+                  name: english_title
+                  value: Canada Goose
+              - column:
+                  name: description
+                  value: Голова и шея блестящие чёрные с крупными белыми пятнами по бокам головы, захватывающими щёку, подбородок и горло. Изредка небольшая белая отметина также имеется на лбу. Грудь, верхняя часть брюха и бока от сероватого или почти белого до волнистого шоколадно-коричневого или бурого; нижняя часть брюха и подхвостье белые.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 4
+              - column:
+                  name: id_species_status
+                  value: 3
+
+        - insert:
+            tableName: birds
+            columns:
+              - column:
+                  name: id
+                  value: 10c5c119-4a33-42d1-8488-652f7e642196
+              - column:
+                  name: latin_name
+                  value: Branta leucopsis
+              - column:
+                  name: russian_name
+                  value: Белощекая казарка
+              - column:
+                  name: english_title
+                  value: Barnacle Goose
+              - column:
+                  name: description
+                  value: Белощекая казарка — некрупный гусь с длиной тела 60–70 см, размахом крыльев 132–145 см, весом 1–2,5 кг. В окраске сочетается черный, белый и серебристо-белый цвета. Характерно белое или кремовое «лицо», контрастирующее с блестящей черной шапочкой, черной шеей и зобом. Брюхо беловатое с серыми штрихами.
+              - column:
+                  name: avatar_id
+                  value: temp
+              - column:
+                  name: id_conservation_status
+                  value: 2
+              - column:
+                  name: id_species_status
+                  value: 2

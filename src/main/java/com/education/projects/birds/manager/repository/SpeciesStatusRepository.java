@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface SpeciesStatusRepository extends JpaRepository <SpeciesStatus, UUID> {
+public interface SpeciesStatusRepository extends JpaRepository <SpeciesStatus, Integer> {
 }

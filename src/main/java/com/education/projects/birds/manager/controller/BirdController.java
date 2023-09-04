@@ -104,7 +104,7 @@ public class BirdController {
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
     @GetMapping("/birds/{id}")
-    public ResponseEntity<BirdDtoResp> getBirdById(@PathVariable ("id") @NotNull @Min(1) UUID id)
+    public ResponseEntity<BirdDtoResp> getBirdById(@PathVariable ("id") @NotNull  UUID id)
     throws Exception{
         log.info("Gets bird with id = {}", id);
         return new ResponseEntity <> (dbBirdServiceImpl.getBirdById(id), HttpStatus.OK);

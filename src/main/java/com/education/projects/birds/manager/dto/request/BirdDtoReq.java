@@ -15,6 +15,7 @@ import java.util.UUID;
 @Data
 public class BirdDtoReq {
 
+
     @Schema (name = "english_title", description = "Bird english_title", example = "John")
     @NotBlank (message = "english_title should not be blank")
     @Size(min = 1, max = 150, message = "150 characters max")
@@ -44,11 +45,11 @@ public class BirdDtoReq {
     @NotNull (message = "id_conservation_status should not be empty")
     @Positive (message = "id_conservation_status should be positive")
     @Digits(integer = 2, fraction = 0, message = "integer number of not more than 2 characters")
-    private UUID id_conservation_status;
+    private Integer id_conservation_status;
 
     @Schema (name = "id_species_status", description = "Bird id_species_status", example = "3")
     @NotNull (message = "id_species_status should not be empty")
     @Positive (message = "id_species_status should be positive")
     @Digits(integer = 2, fraction = 0, message = "integer number of not more than 2 characters")
-    private UUID id_species_status;
+    private Integer id_species_status;
 }

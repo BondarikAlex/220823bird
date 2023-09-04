@@ -16,7 +16,7 @@ public class ConservationStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "id", description = "ConservationStatus id", example = "1")
     @Column(name = "id", insertable = false)
-    private UUID id;
+    private Integer id;
 
     @Schema (name = "status_name", description = "Description of the status_name", example = "Изчезающие")
     @Column(name = "status_name", nullable = false)

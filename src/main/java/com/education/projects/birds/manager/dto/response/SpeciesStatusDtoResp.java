@@ -8,7 +8,7 @@ import java.util.UUID;
 @Data
 public class SpeciesStatusDtoResp {
     @Schema(name = "id", description = "status_name id", example = "1")
-    private UUID id;
+    private Integer id;
 
     @Schema (name = "status_name", description = "Description of the status_name", example = "administrator")
     private String status_name;

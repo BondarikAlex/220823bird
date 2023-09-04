@@ -16,32 +16,34 @@ public class BirdDtoResp {
     @Schema(name = "id", description = "Bird id", example = "1")
     private UUID Id;
 
-    @Schema (name = "avatar_id", description = "Bird avatar_id", example = "John")
-    private String avatar_id;
-
-    @Schema (name = "description", description = "Bird description", example = "Описание птицы говоруна")
-    private String description;
-
-    @Schema (name = "russian_name", description = "Bird russian_name", example = "Птица Говорун")
+    @Schema(name = "russian_name", description = "Bird russian_name", example = "Птица Говорун")
     private String russian_name;
 
-    @Schema (name = "latin_name", description = "Bird latin_name", example = "Птица Говорун")
+    @Schema(name = "latin_name", description = "Bird latin_name", example = "Птица Говорун")
     private String latin_name;
 
-    @Schema (name = "english_title", description = "Bird english_title", example = "Птица Говорун")
+    @Schema(name = "english_title", description = "Bird english_title", example = "Птица Говорун")
     private String english_title;
 
-    @Schema (name = "id_species_status", description = "Bird speciesStatus", example = "2")
-    private UUID id_species_status;
+    @Schema(name = "id_species_status", description = "Bird speciesStatus", example = "2")
+    private Integer id_species_status;
 
-    @Schema (name = "id_conservation_status", description = "Bird id_conservation_status", example = "3")
-    private UUID id_conservation_status;
+    @Schema(name = "id_conservation_status", description = "Bird id_conservation_status", example = "3")
+    private Integer id_conservation_status;
 
-    @Schema (name = "createdAt", description = "Bird creation date", example = "2017-05-14T10:34")
+    @Schema(name = "avatar_id", description = "Bird avatar_id", example = "John")
+    private String avatar_id;
+
+    @Schema(name = "description", description = "Bird description", example = "Описание птицы говоруна")
+    private String description;
+
+    @Schema(name = "createdAt", description = "Bird creation date", example = "2017-05-14T10:34")
     private LocalDateTime createdAt;
 
-    @Schema (name = "modificationAt", description = "Bird modification date", example = "2017-05-14T10:34")
+    @Schema(name = "modificationAt", description = "Bird modification date", example = "2017-05-14T10:34")
     private LocalDateTime modificationAt;
+
+
 }
 
 

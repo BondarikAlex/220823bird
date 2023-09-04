@@ -19,7 +19,7 @@ public class SpeciesStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "id", description = "SpeciesStatus id", example = "1")
     @Column(name = "id", insertable = false)
-    private UUID id;
+    private Integer id;
 
     @Schema (name = "status_name", description = "Description of the status_name", example = "Гнездящие")
     @Column(name = "status_name", nullable = false)

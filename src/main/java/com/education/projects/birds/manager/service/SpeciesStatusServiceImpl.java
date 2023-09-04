@@ -13,34 +13,27 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class SpeciesStatusServiceImpl  {
+public class SpeciesStatusServiceImpl implements SpeciesStatusService  {
     @Autowired
     private SpeciesStatusRepository speciesStatusRepository;
     @Autowired
     private SpeciesStatusMapper speciesStatusMapper;
 
-    /**
-     * Gets all SpeciesStatus objects information from database
-     *
-     * @return The list of the SpeciesStatus objects
-     */
-    public Collection<SpeciesStatusDtoResp> getAllSpeciesStatus() throws Exception{
+    public Collection<SpeciesStatusDtoResp> getAllSpeciesStatus() throws Exception {
+        Collection<SpeciesStatusDtoResp> result;
         try {
-            return speciesStatusMapper.speciesStatusListToSpeciesStatusDtoList(speciesStatusRepository.findAll());
-        }catch (Exception e){
+            result = speciesStatusMapper.speciesStatusListToSpeciesStatusDtoList(speciesStatusRepository.findAll());
+        } catch (Exception e) {
             log.error("Error: {}", e.getMessage());
             throw new Exception(e.getMessage());
         }
+        return result;
     }
 
-    /**
-     * Gets the SpeciesStatus object information from the database by id
-     *
-     * @param id id of the SpeciesStatus object in database
-     * @return The SpeciesStatus object from database
-     * @throws Exception
-     */
-    public SpeciesStatusDtoResp getSpeciesStatusDtoById(UUID id) throws Exception {
+
+     // Gets the SpeciesStatus object information from the database by id
+
+    public SpeciesStatusDtoResp getSpeciesStatusDtoById(Integer id) throws Exception {
         try {
             if (speciesStatusRepository.existsById(id))
                 return speciesStatusMapper.speciesStatusToSpeciesStatusDto(speciesStatusRepository.getReferenceById(id));
@@ -55,7 +48,7 @@ public class SpeciesStatusServiceImpl  {
         }
     }
 
-    public SpeciesStatus getSpeciesStatusById(UUID id) throws Exception {
+    public SpeciesStatus getSpeciesStatusById(Integer id) throws Exception {
         try {
             if (speciesStatusRepository.existsById(id))
                 return speciesStatusRepository.getReferenceById(id);

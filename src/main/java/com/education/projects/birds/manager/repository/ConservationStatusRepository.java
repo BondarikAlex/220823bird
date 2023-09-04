@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ConservationStatusRepository extends JpaRepository <ConservationStatus, UUID> {
+public interface ConservationStatusRepository extends JpaRepository <ConservationStatus, Integer> {
+
 }

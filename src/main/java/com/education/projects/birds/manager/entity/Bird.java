@@ -28,7 +28,7 @@ public class Bird {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Schema(name = "id", description = "Bird id", example = "1")
     @Column(name = "id", insertable = false)
     private UUID id;

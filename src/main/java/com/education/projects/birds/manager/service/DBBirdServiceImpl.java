@@ -51,8 +51,8 @@ public class DBBirdServiceImpl implements BirdService {
 
             BirdDtoResp birdDtoResp = birdMapper.birdToBirdDto(
                     birdRepository.save(bird));
-            birdDtoResp.setId_species_status(bird.getConservationStatus().getId());
-            birdDtoResp.setId_species_status(bird.getConservationStatus().getId());
+            birdDtoResp.setId_species_status(bird.getSpeciesStatus().getId());
+            birdDtoResp.setId_conservation_status(bird.getConservationStatus().getId());
             return birdDtoResp;
 
     }

@@ -1,4 +1,5 @@
 /postgres
+/speciesStatus.home_IS_UNDEFINED
 /.idea
 /target
 /logs

@@ -37,7 +37,7 @@ public class BirdController {
     @Operation(summary = "Creates new row in database with bird information",
             description = "Returns created bird information from database")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully created"),
+            @ApiResponse(responseCode = "200", description = "Successfully created"),
             @ApiResponse(responseCode = "400", description = "Bad request"),
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
@@ -119,7 +119,7 @@ public class BirdController {
             @ApiResponse(responseCode = "500", description = "Internal Server error")
     })
     @DeleteMapping("/birds/{id}")
-    public ResponseEntity<String> deleteBirdById(@PathVariable ("id") @NotNull @Min(1) UUID id)
+    public ResponseEntity<String> deleteBirdById(@PathVariable ("id") @NotNull UUID id)
             throws Exception {
         log.info("Deletes bird with id = {}", id);
         dbBirdServiceImpl.deleteBirdById(id);

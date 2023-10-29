@@ -3,6 +3,7 @@ import com.education.projects.birds.manager.dto.request.BirdDtoReq;
 import com.education.projects.birds.manager.dto.response.BirdDtoResp;
 import com.education.projects.birds.manager.entity.Bird;
 import com.education.projects.birds.manager.exception.BirdNotFoundException;
+import com.education.projects.birds.manager.integration.mediaHolder.MediaHolderClient;
 import com.education.projects.birds.manager.mapper.BirdMapper;
 import com.education.projects.birds.manager.repository.BirdRepository;
 import com.education.projects.birds.manager.repository.SearchCriteria;
@@ -35,6 +36,8 @@ public class DBBirdServiceImpl implements BirdService {
     private BirdCriteriaRepository birdCriteriaRepository;
     @Autowired
     private BirdMapper birdMapper;
+//    Autowired
+//    private MediaHolderClient mediaHolderClient;
 
     /**
      * Creates a new User object information in the database, returns a User object from database by id
@@ -52,6 +55,7 @@ public class DBBirdServiceImpl implements BirdService {
             BirdDtoResp birdDtoResp = birdMapper.birdToBirdDto(birdRepository.save(bird));
             birdDtoResp.setId_species_status(bird.getSpeciesStatus().getId());
             birdDtoResp.setId_conservation_status(bird.getConservationStatus().getId());
+        //    birdDtoResp.setAvatar_id(mediaHolderClient.);
             return birdDtoResp;
 
     }

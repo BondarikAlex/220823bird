@@ -14,13 +14,28 @@ services:
       - 5432:5432
     restart: unless-stopped
 
-  birds:
-    image: demo:v1
+
+
+  media-holder:
+    image: docker.io/fldslf/media-holder:latest
+ #   image: media-holder:v-1
     environment:
-      spring.datasource.url: l
+      DATABASE_HOST: postgres
     ports:
-      - 8080:8080
+      - 8081:8080
     depends_on:
       - postgres
-    networks:
-      - postgres_default
+
+
+
+
+#  birds:
+#    image: demo:v1
+#    environment:
+#      spring.datasource.url: l
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - postgres
+#    networks:
+#      - postgres_default
